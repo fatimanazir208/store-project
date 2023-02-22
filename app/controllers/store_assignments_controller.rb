@@ -1,0 +1,3 @@
+class StoreAssignmentsController < ApplicationController
+  
+end

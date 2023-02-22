@@ -1,3 +1,36 @@
+
 .user-name{
-  padding-right: 5px;
+  margin-top: 3.5%;
+  padding-right: 15px;
+}
+
+.link{
+  color:black !important;
+}
+
+.link:hover{
+  color:black !important;
+  text-decoration: none !important;
+}
+
+.logout-button{
+  margin-right: 5px;
+}
+
+.jumbotron{
+  background-image: asset-url('background.jpeg');
+    background-size: cover;
+    color: white !important;
+}
+
+.yellow{
+  background-color: rgb(226, 210, 64) !important;
+}
+
+.txt-yellow{
+  color: rgb(226, 210, 64) !important;
+}
+
+.white{
+  color: white !important;
 }

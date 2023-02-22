@@ -1,0 +1,30 @@
+<h1 class="mt-2 mb-4">Users</h1>
+
+
+<table class="table table-bordered col-8">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Stores</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <% if !user.admin %>
+        <tr>
+          <td><%= user.full_name %></td>
+          <td>
+            <% if user.store_assignments.any? %>
+              <%= render user.stores %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to 'Edit', "users/edit/#{user.id}", class: 'btn btn-sm btn-warning' %>
+            <%= link_to 'Delete', "users/#{user.id}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger'%>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

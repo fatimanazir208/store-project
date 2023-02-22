@@ -1,0 +1,23 @@
+<h1  class="mt-2 mb-4"><%= @store.name %><small> - Categories</small></h1>
+
+<% if current_user.admin %>
+  <%= link_to 'Add new categories to store', "create_category/#{@store.id}", class:'btn btn-primary' %>
+<% end %>
+
+<% if @categories %>
+  <div class="row mx-auto mt-3" type="button" data-toggle="tooltip" data-placement="bottom" title=<%= %>>
+    <% @categories.each do |category| %>
+          <div class="card text-center col-2 p-3 m-3">
+            <div class="card-body p-0">
+              <h5 class="card-title"><%= link_to category.name, category_path(category), class:'link' %></h5>
+              <% if current_user.admin %>
+                <%= link_to 'Edit', edit_category_path(category), class: 'btn btn-sm btn-success' %>
+                <%= link_to 'Remove', category_path(category), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-warning' %>
+              <% end %>
+            </div>
+          </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to '[Go back to stores]', stores_path %>

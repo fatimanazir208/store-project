@@ -1,0 +1,19 @@
+<h1 class="mt-2 mb-4"><%= @category.store.name %><small> - <%= @category.name %></small></h1>
+
+<%= form_for :item do |f| %>
+  <%= render 'shared/errors', obj: @item%>
+  <div class="form-group row col-6 p-0">
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :price %>
+      <%= f.number_field :price, value: @item.price ? '%.2f' % @item.price : nil, min: 0, step: 0.01, autofocus: true, autocomplete: 'price', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: 'btn btn-primary' %> 
+    </div>
+  </div>
+<% end %>
+

@@ -1,0 +1,19 @@
+<h1  class="mt-2 mb-4"><%= link_to @category.store.name, store_path(@category.store), class: 'link' %><small> - <%= @category.name %></small></h1>
+
+<% if current_user.admin %>
+  <%= link_to 'Add new items to category', "create_item/#{@category.id}", class:'btn btn-primary' %>
+<% end %>
+
+<div class="row mx-auto mt-3">
+  <% @category.items.each do |item| %>
+    <div class="card text-center col-2 p-3 m-3">
+      <div class="card-body p-0">
+        <h5 class="card-title"><%= item.name %></h5>
+        <p>Rs. <%= item.price %></p>
+        <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-sm btn-success' %>
+        <%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-warning'%>
+      </div>
+    </div>
+  <% end %>
+</div>
+

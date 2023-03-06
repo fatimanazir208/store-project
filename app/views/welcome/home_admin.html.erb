@@ -1,1 +1,12 @@
-welcome admin
+<div class="row mt-4">
+  <div class="col-6">
+    <h2 class="mt-2 mb-4 text-center fw-bold">Users</h2>
+    <%= render 'users/list' %>
+    <%= link_to 'Create user', new_user_registration_path, class:'btn mb-4 shadow-sm bg-dark-gray text-yellow' %>
+  </div>
+  <div class="col-6">
+    <h2 class="mt-2 mb-4 text-center fw-bold">Stores</h2>
+    <%= render 'stores/list' %>
+    <%= link_to 'Create store', new_store_path, class:'btn mb-4 shadow-sm bg-dark-gray text-yellow' %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<% if @store_errors != nil %> 
+    <div class="alert alert-danger alert-dismissible fade show py-0 px-2" role="alert">
+        <h5 class="alert heading my-0 pb-2 me-2">The following errors prevented the <%= @store.class.name.downcase %> from being saved</h5> 
+        <ul class="mx-2"> 
+        <% @store_errors.each do |msg| %>
+            <li><%= msg %></li> 
+        <% end %> 
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+<% end %>
+
+

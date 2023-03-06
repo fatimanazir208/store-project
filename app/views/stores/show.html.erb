@@ -1,23 +1,58 @@
-<h1  class="mt-2 mb-4"><%= @store.name %><small> - Categories</small></h1>
+<h1 class="mt-2 mb-4"><%= @store.name %><small> - Categories</small></h1>
 
-<% if current_user.admin %>
-  <%= link_to 'Add new categories to store', "create_category/#{@store.id}", class:'btn btn-primary' %>
-<% end %>
-
-<% if @categories %>
-  <div class="row mx-auto mt-3" type="button" data-toggle="tooltip" data-placement="bottom" title=<%= %>>
-    <% @categories.each do |category| %>
-          <div class="card text-center col-2 p-3 m-3">
-            <div class="card-body p-0">
-              <h5 class="card-title"><%= link_to category.name, category_path(category), class:'link' %></h5>
-              <% if current_user.admin %>
-                <%= link_to 'Edit', edit_category_path(category), class: 'btn btn-sm btn-success' %>
-                <%= link_to 'Remove', category_path(category), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-warning' %>
+<% if !@categories.empty? %>
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <% @categories.each do |category| %>
+          <div class="card text-center col-3 p-3 m-3 dropdown">
+            <div class="card-body p-0 dropdown-togglee">
+              <% if !category.items.empty? %>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                  <% category.items.each do |item| %>
+                    <%= link_to add_to_cart_path(item: item, cart: @cart), remote:true, class:'link' do %>
+                      <div class="dropdown-item">
+                        <p class="m-0 p-0"><%= item.name %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  </div>
+              <% else %>
+                <div class="no-items dropdown-menu" aria-labelledby="navbarDropdown1">
+                  No items in this category
+                </div>
               <% end %>
+              <h5 class="card-title m-0 p-0"><%= category.name %></h5>
             </div>
           </div>
-    <% end %>
+        <% end %>
+      </div>
+      
+    </div>
+    <div class="col-6" id="cart">
+      <% if @cart.items.empty? %>
+        <h3 class="text-center">Cart</h3>
+        <div class="row mx-2 py-2 border-bottom fw-bold">
+            <div class="col-1"></div>
+            <div class="col-6">Item</div>
+            <div class="col-2 text-center">Qty</div>
+            <div class="col-3 text-center">Price</div> 
+        </div>            
+        <div class='row mx-2 py-2 fw-bold'>
+          <div class='col-1'></div>
+          <div class='col-6'></div>
+          <div class='col-2 text-center'>Total</div>
+          <div class='col-3 text-center'>Rs. 0</div>
+        </div>   
+      <% elsif !@cart.items.empty? %>
+        <%= render 'carts/cart'  %>
+      <% end %>
+    </div>
+
   </div>
+<% else %>
+  <p> Currently no categories in this store </p>
 <% end %>
 
-<%= link_to '[Go back to stores]', stores_path %>
+
+<%= link_to '[Go back to stores]', root_path %>

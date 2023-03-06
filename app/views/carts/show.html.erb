@@ -1,0 +1,7 @@
+<div type="button" class="position-relative cart bg-light mt-3 float-right">
+<%= link_to '', cart_path(obj), class:"fa-solid fa-cart-shopping link" %>
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    <%= obj.items.count %>
+    <span class="visually-hidden">unread messages</span>
+  </span>
+</div>

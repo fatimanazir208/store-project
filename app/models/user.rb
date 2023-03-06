@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :store_assignments
+  has_many :receipts
+  has_many :store_assignments, dependent: :destroy
   has_many :stores, through: :store_assignments
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

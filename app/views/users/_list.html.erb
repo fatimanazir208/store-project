@@ -1,0 +1,29 @@
+<table class="table table-bordered">
+  <thead>
+    <tr class="text-center">
+      <th scope="col">User</th>
+      <th scope="col">Stores</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <% if !user.admin %>
+        <tr >
+          <td class="align-middle"><%= user.full_name %></td>
+          <td class="align-middle">
+            <% if user.store_assignments.any? %>
+              <%= render user.stores %>
+            <% end %>
+          </td>
+          <td class="text-center align-middle col-5 px-0" >
+            <%= link_to 'Edit', "users/edit/#{user.id}", class: 'btn btn-sm bg-yellow rounded-2 shadow-sm' %>
+            <%= link_to 'View orders', user_orders_path(user: user), class:'btn btn-sm bg-yellow rounded-2 shadow-sm' %> 
+            <%= link_to 'Delete', "users/#{user.id}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger rounded-2 shadow-sm '%>
+            
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -27,7 +27,7 @@ gem 'devise-bootstrap-views'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 5.2.3'
 gem "font-awesome-rails"
-
+gem 'popper_js', '~> 2.11.5'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

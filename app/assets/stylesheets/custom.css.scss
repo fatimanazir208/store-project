@@ -23,14 +23,99 @@
     color: white !important;
 }
 
-.yellow{
-  background-color: rgb(226, 210, 64) !important;
+.bg-yellow{
+  background-color: #F5CB5C !important;
 }
 
-.txt-yellow{
-  color: rgb(226, 210, 64) !important;
+.text-yellow{
+  color: #F5CB5C !important;
 }
 
-.white{
-  color: white !important;
+.bg-gray{
+  background-color: #333533 !important;
 }
+.text-gray{
+  color: #333533 !important;
+}
+
+.text-blue{
+  color: #CFDBD5 !important;
+}
+
+
+.bg-blue{
+  background-color: #CFDBD5 !important;
+}
+.text-dark-gray{
+  color: #1b2e35 !important;
+
+}
+
+.bg-dark-gray{
+  background-color: #1b2e35  !important;
+}
+.text-offwhite{
+  color: #f2eee6  !important;
+}
+
+.bg-offwhite{
+  background-color: #f2eee6 !important;
+}
+.text-black{
+  color: #242423  !important;
+}
+
+.bg-orange{
+  background-color: #26554d  !important ;
+}
+.text-orange{
+  color: #ab5000  !important;
+}
+
+.bg-black{
+  background-color: #242423 !important ;
+}
+
+.fa-cart-shopping{
+  font-size: 30px;
+}
+
+.cart{
+  border: none;
+}
+
+.checkboxes{
+  display: inline-block;
+}
+.bg-white{
+  background-color: white !important;
+}
+.checkbox {
+  margin-right: 5px;
+}
+.checkbox-label {
+  margin-right: 10px;
+}
+
+.divider{
+  width: 100%;
+  height: 1px;
+  background-color: lightgray;
+  margin: 5px 0px 10px 0px;
+}
+
+
+.no-items{
+  width: 150px !important;
+  font-size: 12px !important;
+  padding: 3px !important;
+  margin: 0px !important;
+  text-align: center !important;
+  color: red !important;
+}
+
+.badge:hover{
+  color: black !important;
+}
+
+

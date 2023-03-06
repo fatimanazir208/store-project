@@ -1,5 +1,53 @@
-<h1 class="mt-2 mb-4">Edit store <%= @store.name %></h1>
+<h1 class="mt-2 mb-4"><%= @store.name %><small> - Edit</small></h1>
 
-<%= render 'stores/form' %>
+<div class="row">
+  <div class="col-6">
+  <%= form_with model: @store, local: true do |f| %>
+    <%= render 'shared/store_errors' %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
+    </div>
+  
+    <% if !@store.categories.empty? %>
+      <div class="form-group">
+        <%= f.label :categories, class:'col my-2 mx-0 p-0'  %>
+        <div class=" border px-2 pt-2 bg-white rounded" >
+          <%= f.collection_check_boxes(:category_ids, @store.categories.all, :id, :name) do |b| %>
+            <div class="checkboxes"> <%= b.check_box class:'checkbox' %><%= b.label class:'checkbox-label { b.text }'%></div>
+          <% end %>
+        </div>
+      </div>  
+    <% end %>    
+  
+    <div class="form-group">
+      <%= f.submit class: 'btn bg-dark-gray text-yellow' %> 
+    </div>
+  <% end %>   
+  </div>
+</div>
 
-<%= link_to '[Cancel and go back to stores]', stores_path %>
+<div class="divider"></div>
+
+<h5>Add new category</h5>
+
+<div class="row">
+  <div class="col-6">
+  <%= form_for :category do |f| %>
+    <%= render 'shared/errors', obj: @category %>
+    <div class="form-group">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Add category', class: 'btn bg-dark-gray text-yellow' %> 
+      </div>
+    </div>
+  <% end %>   
+  </div>
+</div>
+
+
+
+<%= link_to '[Cancel and go back to home]', root_path %>

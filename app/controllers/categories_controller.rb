@@ -1,11 +1,11 @@
 class CategoriesController < ApplicationController
+  def add_to_cart 
+  end
+  
   def index
     @categories = Category.all
   end
 
-  def show
-    @category = Category.find(params[:id])
-  end
 
   def new
     @category = Category.new
@@ -31,13 +31,14 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.store_id = params[:store_id]
+    @category.store_id = params[:id]
+    @store = Store.find(params[:id])
     if @category.save
       flash[:notice] = "Category was added successfully"
-      redirect_to store_path(@category.store)
+      redirect_to edit_store_path(@category.store)
     else
-      @store = Store.find(params[:store_id])
-      render 'new'
+      @store_errors = nil
+      render 'stores/edit'
     end
   end
 

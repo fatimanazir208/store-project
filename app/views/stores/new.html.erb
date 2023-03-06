@@ -1,5 +1,32 @@
 <h1 class="mt-2 mb-4">Create a store</h1>
 
-<%= render 'stores/form' %>
+<div class="row">
+  <div class="col-6">
+    <%= form_with model: @store, local: true do |f| %>
+      <%= render 'shared/errors', obj: @store%>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
+      </div>
+
+      <% if !@users.empty? %>
+        <div class="form-group mb-3">
+          <%= f.label :users, class:'col my-2 mx-0 p-0'  %>
+          <div class=" border px-2 pt-2 bg-white rounded">
+            <%= f.collection_check_boxes(:user_ids, @users, :id, :first_name) do |b| %>
+              <div class="checkboxes"> <%= b.check_box class:'checkbox' %><%= b.label class:'checkbox-label { b.text }'%></div>
+            <% end %>
+          </div>
+        </div>  
+      <% end %>
+      
+      <div class="form-group">
+        <%= f.submit class: 'btn bg-dark-gray text-yellow' %> 
+      </div>
+      
+    <% end %>   
+  </div>
+</div>
+
 
 <%= link_to '[Cancel and go back to stores]', stores_path %>

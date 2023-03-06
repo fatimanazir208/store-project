@@ -1,0 +1,24 @@
+<h2 class="mt-2 mb-4">All orders</h2>
+<% if !@orders.any? %>
+  <p>No orders</p>
+<% else %>
+  <table class="table table-bordered">
+    <thead>
+      <tr class= "text-center">
+        <th scope="col">Order ID</th>
+        <th scope="col">Order Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td class="text-center align-middle"><%= order.id %></td>
+          <td class="align-middle"><%= order.order_summary %> on <%= order.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+<%= link_to '[ Go back to home ]', root_path%>

@@ -6,9 +6,18 @@
         <%= f.label :name %>
         <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
       </div>
+
+      <div class="form-group mb-3">
+        <%= f.label :users, class:'col my-2 mx-0 p-0'  %>
+        <div class=" border px-2 pt-2 bg-white rounded">
+          <%= f.collection_check_boxes(:user_ids, @users, :id, :first_name) do |b| %>
+            <div class="checkboxes"> <%= b.check_box class:'checkbox' %><%= b.label class:'checkbox-label { b.text }'%></div>
+          <% end %>
+        </div>
+      </div>  
       
       <div class="form-group">
-        <%= f.submit class: 'btn btn-primary' %> 
+        <%= f.submit class: 'btn bg-dark-gray text-yellow' %> 
       </div>
       
     <% end %>   

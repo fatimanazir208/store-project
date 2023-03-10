@@ -4,6 +4,6 @@ class Item < ApplicationRecord
   belongs_to :category
   has_many :cart_items
   has_many :carts, through: :cart_items
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :category_id}
   validates :price, presence: true
 end

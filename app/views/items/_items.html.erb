@@ -1,0 +1,21 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @category.items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td>Rs. <%= item.price %></td>
+        <td>
+          <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-sm bg-yellow text-dark-gray rounded-2 shadow-sm' %>
+          <%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger rounded-2 shadow-sm'%>    
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

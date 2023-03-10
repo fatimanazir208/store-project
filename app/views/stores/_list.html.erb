@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table table-bordered mb-0">
   <thead>
     <tr class= "text-center">
       <th scope="col">Store</th>
@@ -14,12 +14,12 @@
           <% if store.categories.any? %>
             <%= render store.categories %>
           <% else %>
-            <small>Edit store to add categories</small>
+            <small class="text-danger">Edit store to add categories</small>
           <% end %>
         </td>
         <td class="text-center align-middle col-5 px-0 ">
           <%= link_to 'Edit', edit_store_path(store), class:"btn btn-sm bg-yellow rounded-2 shadow-sm" %>
-          <%= link_to 'View orders', store_orders_path(store: store), class:'btn btn-sm bg-yellow rounded-2 shadow-sm' %>
+          <%= link_to 'View orders', orders_store_path(store), class:'btn btn-sm bg-yellow rounded-2 shadow-sm' %>
           <%= link_to 'Delete', store_path(store), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger rounded-2 shadow-sm' %>
           
         </td>

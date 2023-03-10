@@ -7,7 +7,7 @@
     </button>
     
     <% if current_user && current_user.admin? %>
-    <%= link_to 'Orders', orders_path, class: 'nav-link text-offwhite fs-4' %>
+    <%= link_to 'Orders', receipts_path, class: 'nav-link text-offwhite fs-4' %>
     <% end %>
       <% if current_user %>
       <ul class='navbar-nav ml-auto'>

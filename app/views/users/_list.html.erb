@@ -14,10 +14,12 @@
           <td class="align-middle">
             <% if user.store_assignments.any? %>
               <%= render user.stores %>
+            <% else %>
+              <small class="text-danger">Edit user to assign store</small>
             <% end %>
           </td>
           <td class="text-center align-middle col-5 px-0" >
-            <%= link_to 'Edit', "users/edit/#{user.id}", class: 'btn btn-sm bg-yellow rounded-2 shadow-sm' %>
+            <%= link_to 'Edit', edit_user_registration_path(id: user), class: 'btn btn-sm bg-yellow rounded-2 shadow-sm' %>
             <%= link_to 'View orders', user_orders_path(user: user), class:'btn btn-sm bg-yellow rounded-2 shadow-sm' %> 
             <%= link_to 'Delete', "users/#{user.id}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger rounded-2 shadow-sm '%>
             

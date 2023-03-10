@@ -11,14 +11,14 @@
     <% item = Item.find(cart_item.item_id) %>
     <div class='row align-items-center border-bottom mx-2 py-3' >
       <div class='col-1 text-center'>
-        <%= link_to 'x', remove_item_from_cart_path(item: item, cart: @cart), remote:true, class:'link btn btn-rounded btn-danger py-0 px-2 text-white' %>
+        <%= link_to 'x', remove_item_from_cart_path(@cart, item: item), remote:true, class:'link btn btn-rounded btn-danger py-0 px-2 text-white' %>
       </div>
       <div class='col-6'><%= item.name %></div>
       <div class='col-2 text-center p-0 mx-auto'>
         <div class='btn-group' role='group'>
-          <%= link_to '-', remove_from_cart_path(item: item, cart: @cart), remote:true, class:'link btn btn-outline-secondary border-dark rounded-start py-0 px-1' %>
+          <%= link_to '-', decrement_item_from_cart_path(@cart, item: item), remote:true, class:'link btn btn-outline-secondary border-dark rounded-start py-0 px-1' %>
           <p class='border-top border-bottom border-1 border-dark m-0 p-0' style='width:2rem;'><%= cart_item.quantity %></p>
-          <%= link_to '+', add_to_cart_path(item: item, cart: @cart), remote:true, class:'link btn btn-outline-secondary border-dark rounded-end py-0 px-1' %>
+          <%= link_to '+', increment_item_to_cart_path(@cart, item: item), remote:true, class:'link btn btn-outline-secondary border-dark rounded-end py-0 px-1' %>
         </div>
       </div>
       <div class='col-3 text-center'>Rs. <%= item.price %></div>
@@ -33,6 +33,8 @@
   <div class='col-3 text-center'>Rs. <%= @cart.total %></div>
 </div>
 
-<%= link_to 'Empty Cart', empty_cart_path(cart: @cart), remote: true, class: 'btn btn-sm btn-secondary' %>
-<%= link_to 'Checkout', generate_receipt_path(cart: @cart), class: 'btn btn-sm btn-secondary'%>
+<% if !@cart.cart_items.empty? %>
+  <%= link_to 'Empty Cart', empty_cart_path(@cart), remote: true, class: 'btn btn-sm btn-secondary' %>
+  <%= link_to 'Checkout', new_receipt_path(cart: @cart), class: 'btn btn-sm btn-secondary'%>
+<% end %>
 

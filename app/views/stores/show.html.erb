@@ -10,7 +10,7 @@
               <% if !category.items.empty? %>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                   <% category.items.each do |item| %>
-                    <%= link_to add_to_cart_path(item: item, cart: @cart), remote:true, class:'link' do %>
+                    <%= link_to add_to_cart_path(store: category.store, item: item), remote:true, class:'link' do %>
                       <div class="dropdown-item">
                         <p class="m-0 p-0"><%= item.name %></p>
                       </div>
@@ -18,8 +18,10 @@
                   <% end %>
                   </div>
               <% else %>
-                <div class="no-items dropdown-menu" aria-labelledby="navbarDropdown1">
-                  No items in this category
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                  <div class="no-items">
+                    No items in this category
+                  </div>
                 </div>
               <% end %>
               <h5 class="card-title m-0 p-0"><%= category.name %></h5>
@@ -30,7 +32,7 @@
       
     </div>
     <div class="col-6" id="cart">
-      <% if @cart.items.empty? %>
+      <% if @cart.nil? || @cart.items.empty? %>
         <h3 class="text-center">Cart</h3>
         <div class="row mx-2 py-2 border-bottom fw-bold">
             <div class="col-1"></div>
@@ -44,7 +46,7 @@
           <div class='col-2 text-center'>Total</div>
           <div class='col-3 text-center'>Rs. 0</div>
         </div>   
-      <% elsif !@cart.items.empty? %>
+      <% else %>
         <%= render 'carts/cart'  %>
       <% end %>
     </div>

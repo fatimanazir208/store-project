@@ -1,22 +1,36 @@
 class ReceiptsController < ApplicationController
-  def generate_receipt
-    @cart = Cart.find(params[:cart])
-    @receipt = Receipt.new
-    @receipt.order_summary = "#{current_user.full_name} bought"
-    @cart.cart_items.each do |cart_item|
-      @receipt.order_summary << " #{cart_item.item.name} x#{cart_item.quantity},"
-    end
-    @receipt.order_summary << " from #{@cart.store.name}"
-    @receipt.user = current_user
-    @receipt.store = @cart.store
-    @receipt.save
-    @cart.cart_items.destroy_all
-    @cart.total = 0
-    @cart.save
-    redirect_to checkout_path(receipt: @receipt)
+
+  before_action :require_admin, only: [:index]
+  before_action :require_user, except: [:index]
+
+  def index
+    @receipts = Receipt.all
   end
 
-  def checkout
-    @receipt = Receipt.find(params[:receipt]) 
+
+  def new
+    @cart = Cart.find(params[:cart])
+    receipt_creator = ReceiptGeneratorService.new(@cart)
+    @receipt = receipt_creator.create_receipt
+    redirect_to receipt_path(@receipt)
   end
+  
+  def show
+    @receipt = Receipt.find(params[:id]) 
+  end
+
+  private
+
+  def require_admin
+    unless current_user && current_user.admin?
+      redirect_to root_path, alert: "You don't have permission to access this page."
+    end
+  end
+
+  def require_user
+    unless current_user && !current_user.admin?
+      redirect_to root_path
+    end
+  end
+
 end

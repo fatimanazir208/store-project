@@ -1,6 +1,6 @@
-<h1 class="mt-2 mb-4"><%= @category.store.name %><small> - <%= @category.name %></small></h1>
+<h1 class="mt-2 mb-4"><%= @item.category.store.name %><small> - <%= @item.category.name %></small></h1>
 
-<%= form_for :item do |f| %>
+<%= form_for @item do |f| %>
   <div class="col-8 p-0">
     <%= render 'shared/errors', obj: @item %>
     <div class="form-group row ">
@@ -12,6 +12,7 @@
         <%= f.label :price %>
         <%= f.number_field :price,  autofocus: true, autocomplete: 'price', class: 'form-control' %>
       </div>
+      <%= f.hidden_field :category_id, value: @item.category_id, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.submit class: 'btn bg-dark-gray text-yellow' %> 
@@ -19,4 +20,4 @@
   </div>
 <% end %>
 
-<%= link_to '[Cancel and go back]', "/new_item/#{@category.id}" %>
+<%= link_to '[Cancel and go back]', new_item_path(category: @category)%>

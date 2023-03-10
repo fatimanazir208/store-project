@@ -1,24 +1,12 @@
 class CategoriesController < ApplicationController
-  def add_to_cart 
-  end
-  
-  def index
-    @categories = Category.all
-  end
-
-
-  def new
-    @category = Category.new
-    @store = Store.find(params[:store_id])
-  end
+  before_action :set_category, only: [:edit, :update, :destroy]
+  before_action :require_admin
 
   def edit
-    @category = Category.find(params[:id])
     @store = @category.store
   end
 
   def update
-    @category = Category.find(params[:id])
     if @category.update(category_params)
       flash[:notice] = "Category was updated successfully."
       redirect_to store_path(@category.store)
@@ -30,29 +18,38 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(category_params)
-    @category.store_id = params[:id]
-    @store = Store.find(params[:id])
+    @store = Store.find(params[:category][:store_id])
+    @category = @store.categories.build(category_params)
     if @category.save
-      flash[:notice] = "Category was added successfully"
-      redirect_to edit_store_path(@category.store)
+      flash[:success] = "Category created successfully"
+      redirect_to edit_store_path(@store)
     else
-      @store_errors = nil
-      render 'stores/edit'
+      @users = User.where(admin: false)
+      render template: 'stores/edit'
     end
+
   end
 
   def destroy
-    @category = Category.find(params[:id])
     @category.destroy
     flash[:alert] = "Category and all asociated items within them were deleted."
     redirect_to store_path(@category.store)
   end
 
   private
-  def category_params
-    params.require(:category).permit(:name)
+
+  def set_category
+    @category = Category.find(params[:id])
   end
 
+  def category_params
+    params.require(:category).permit(:name, :store_id)
+  end
+
+  def require_admin
+    unless current_user && current_user.admin?
+      redirect_to root_path, alert: "You don't have permission to access this page."
+    end
+  end
 
 end

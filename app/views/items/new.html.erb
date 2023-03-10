@@ -2,8 +2,8 @@
 
 <% if current_user.admin %>
   <h3>Add new items</h3>
-  <%= form_for :item do |f| %>
-    <div class="col-8 p-0">
+  <%= form_for @item, url: items_path do |f| %>
+    <div class="col-8 ps-0">
       <%= render 'shared/errors', obj: @item %>
       <div class="form-group row ">
         <div class="form-group col-8">
@@ -14,6 +14,7 @@
           <%= f.label :price %>
           <%= f.number_field :price, autofocus: true, autocomplete: 'price', class: 'form-control' %>
         </div>
+        <%= f.hidden_field :category_id, value: @category.id, class: 'form-control' %>
       </div>
       <div class="form-group">
         <%= f.submit class: 'btn bg-dark-gray text-yellow' %> 
@@ -22,30 +23,10 @@
   <% end %>
 <% end %>
 
-<div class="row mt-3">
-  <div class="col-8" id="items">
+<div class="row mt-5">
+  <div class="col-8">
     <% if !@category.items.empty? %>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @category.items.each do |item| %>
-            <tr>
-              <td><%= item.name %></td>
-              <td>Rs. <%= item.price %></td>
-              <td>
-                <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-sm bg-yellow text-dark-gray rounded-2 shadow-sm' %>
-                <%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger rounded-2 shadow-sm'%>    
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render 'items' %>
     <% end %>
   </div>
 </div>

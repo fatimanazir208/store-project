@@ -36,7 +36,7 @@ class CartHandlerService
   end
 
   def clear_cart
-    @cart.cart_items.destroy
+    @cart.cart_items.destroy_all
     update_cart_total(0)
   end
 

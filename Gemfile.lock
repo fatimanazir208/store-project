@@ -92,11 +92,17 @@ GEM
     devise-bootstrap-views (1.1.0)
     erubi (1.12.0)
     execjs (2.8.1)
+    faker (3.1.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    graphiql-rails (1.9.0)
+      railties
+      sprockets-rails
+    graphql (2.0.20)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
@@ -148,6 +154,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.2)
+    rack-cors (2.0.1)
+      rack (>= 2.0.0)
     rack-proxy (0.7.6)
       rack
     rack-test (2.0.2)
@@ -261,12 +269,16 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   devise-bootstrap-views
+  faker
   font-awesome-rails
+  graphiql-rails
+  graphql
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.2)
   popper_js (~> 2.11.5)
   puma (~> 4.1)
+  rack-cors
   rails (~> 6.0.6, >= 6.0.6.1)
   sass-rails (>= 6)
   selenium-webdriver

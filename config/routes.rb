@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  post "/graphql", to: "graphql#execute"
+  
   root 'welcome#index'
   
-  devise_for :users, controllers: { registrations: 'registrations'}
+  # devise_for :users, controllers: { registrations: 'registrations'}
   get 'user_orders', to: 'users#orders'
 
   resources :stores do
@@ -26,7 +31,7 @@ Rails.application.routes.draw do
   get 'add_to_cart', to: 'carts#add_to_cart'
 
   # all your other routes
-  match '*unmatched', to: 'application#not_found_method', via: :all
+  #match '*unmatched', to: 'application#not_found_method', via: :all
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
